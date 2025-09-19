@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rithish Mettu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap');
+      body { font-family: 'Cormorant Garamond', serif; background-color: #000; color: #f3f4f6; overflow-x: hidden; }
+      canvas { position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%; }
+      .section { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 4rem 1rem; position: relative; }
+      .project-card { background-color: rgba(30, 41, 59, 0.7); backdrop-filter: blur(8px); border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+      .project-card:hover { transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+      .animate-on-scroll { opacity: 0; transform: translateY(50px); transition: opacity 1s ease-out, transform 1s ease-out; }
+      .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body class="bg-[#000000] text-gray-100">
+    <canvas id="starCanvas"></canvas>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 p-4 md:p-6 backdrop-filter backdrop-blur-md bg-opacity-30 bg-gray-900 border-b border-gray-700">
+        <nav class="flex justify-between items-center max-w-7xl mx-auto">
+            <h1 class="text-lg md:text-xl font-bold tracking-wide">RITHISH METTU</h1>
+            <div class="hidden md:flex space-x-4 md:space-x-8 text-sm md:text-base font-medium">
+                <a href="#home" class="hover:text-violet-400"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="#about" class="hover:text-violet-400"><i class="fas fa-user-tie mr-2"></i>About</a>
+                <a href="#projects" class="hover:text-violet-400"><i class="fas fa-project-diagram mr-2"></i>Projects</a>
+                <a href="#certifications" class="hover:text-violet-400"><i class="fas fa-certificate mr-2"></i>Certifications</a>
+                <a href="#resume" class="hover:text-violet-400"><i class="fas fa-file-alt mr-2"></i>Resume</a>
+                <a href="#contact" class="hover:text-violet-400"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="section text-center">
+            <div class="max-w-4xl mx-auto p-4 md:p-8">
+                <img src="profile.jpg" alt="Profile Photo" class="profile-photo mx-auto mb-4 rounded-full w-32 h-32 md:w-40 md:h-40 object-cover">
+                <h2 class="text-3xl md:text-6xl font-bold mb-4">Hello, I am <span class="text-violet-400">Rithish</span>.</h2>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto">A passionate B.Tech student in Computer Science seeking to work in a challenging and healthy work environment where I can utilize my skills and knowledge efficiently for organizational growth.</p>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section bg-gray-900 bg-opacity-50 animate-on-scroll">
+            <div class="max-w-4xl mx-auto p-6 rounded-xl shadow-lg border border-gray-700">
+                <h3 class="text-3xl font-bold mb-6 text-center text-violet-400">About Me</h3>
+                <p class="text-gray-300 text-center mb-6">I am Rithish Mettu, currently pursuing B.Tech in Computer Science at Institute of Aeronautical Engineering. I hold a Diploma in CSE from Kshatriya College of Engineering (CGPA 8.58) and SSC with 10 CGPA. Skilled in C, Python, Java, HTML, and JavaScript, with strengths in communication, problem solving, and time management.</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <h4 class="font-semibold text-white mb-2">Education</h4>
+                        <p><strong>B.Tech CSE</strong> – IARE (2024 – Present)<br><strong>Diploma CSE</strong> – Kshatriya College (2021 – 2024)<br><strong>SSC</strong> – ZPHS Mirdhapally (2020 – 2021)</p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <h4 class="font-semibold text-white mb-2">Skills</h4>
+                        <p><strong>Programming:</strong> C, Python, Java<br><strong>Scripting:</strong> HTML, JavaScript<br><strong>Soft Skills:</strong> Communication, Problem Solving, Time Management</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section bg-gray-900 animate-on-scroll">
+            <div class="max-w-6xl mx-auto p-4 md:p-8 w-full">
+                <h3 class="text-3xl font-bold mb-6 text-center text-violet-400">My Projects</h3>
+                <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+                <div class="text-center mt-6">
+                    <a href="https://github.com/rithish-007" target="_blank" class="px-6 py-3 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-lg font-semibold hover:scale-105 inline-block transition">View All Projects →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="section bg-transparent animate-on-scroll">
+            <div class="max-w-6xl mx-auto p-4 md:p-8 w-full">
+                <h3 class="text-3xl font-bold mb-6 text-center text-violet-400">Certifications</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="project-card p-6 text-center"><h4 class="font-semibold">Industrial Training</h4><p class="text-gray-400">Certified by NSIC as part of industrial training internship.</p></div>
+                    <div class="project-card p-6 text-center"><h4 class="font-semibold">Cybersecurity Internship</h4><p class="text-gray-400">Certified by Tata Group as Cybersecurity Analyst (Job Simulation).</p></div>
+                    <div class="project-card p-6 text-center"><h4 class="font-semibold">TCS iON Career Edge</h4><p class="text-gray-400">Young Professional Program Certification.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resume Section -->
+        <section id="resume" class="section bg-gray-900 animate-on-scroll">
+            <div class="max-w-4xl mx-auto p-4 md:p-8 rounded-xl shadow-lg border border-gray-700 text-center">
+                <h3 class="text-3xl font-bold mb-6 text-violet-400">My Resume</h3>
+                <p class="text-gray-300 mb-6">Click below to download my full resume.</p>
+                <a href="RITHISH-METTU-RESUME.pdf" download class="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold bg-gradient-to-r from-violet-600 to-indigo-600 rounded-lg shadow-lg hover:scale-105"><i class="fas fa-download"></i> Download Resume</a>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section animate-on-scroll">
+            <div class="max-w-4xl mx-auto p-4 md:p-8 rounded-xl shadow-lg border border-gray-700 text-center bg-gray-900 bg-opacity-50">
+                <h3 class="text-3xl font-bold mb-6 text-violet-400">Get in Touch</h3>
+                <div class="space-y-4 flex flex-col justify-center items-center">
+                    <a href="mailto:rithishmettu7@gmail.com" class="inline-flex items-center justify-center px-6 py-3 font-semibold border-2 border-gray-500 rounded-lg hover:bg-gray-800 w-full"><i class="fas fa-envelope mr-2"></i>Email: rithishmettu7@gmail.com</a>
+                    <a href="tel:+918978226471" class="inline-flex items-center justify-center px-6 py-3 font-semibold border-2 border-gray-500 rounded-lg hover:bg-gray-800 w-full"><i class="fas fa-phone mr-2"></i>Phone: +91 8978226471</a>
+                    <a href="https://www.linkedin.com/posts/rithishmettu_tcsion-careeredge-youngprofessional-activity-7320479756343218176-wNJa" target="_blank" class="inline-flex items-center justify-center px-6 py-3 font-semibold border-2 border-gray-500 rounded-lg hover:bg-gray-800 w-full"><i class="fab fa-linkedin mr-2"></i>LinkedIn</a>
+                    <a href="https://github.com/rithish-007" target="_blank" class="inline-flex items-center justify-center px-6 py-3 font-semibold border-2 border-gray-500 rounded-lg hover:bg-gray-800 w-full"><i class="fab fa-github mr-2"></i>GitHub</a>
+                </div>
+                <p class="mt-8 text-gray-500 text-sm">© 2025 Rithish Mettu. All Rights Reserved.</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+      async function loadGitHubProjects() {
+        const container = document.getElementById('projects-container');
+        container.innerHTML = '<p class="text-gray-400">Loading projects...</p>';
+        try {
+          const res = await fetch('https://api.github.com/users/rithish-007/repos?sort=updated');
+          let repos = await res.json();
+          repos = repos.filter(r => !r.fork).slice(0, 6);
+          container.innerHTML = '';
+          repos.forEach(repo => {
+            const card = document.createElement('div');
+            card.className = 'project-card p-6 shadow-xl';
+            card.innerHTML = `<h4 class="text-lg font-semibold mb-2">${repo.name}</h4><p class="text-gray-300 mb-3">${repo.description || 'No description provided.'}</p><a href="${repo.html_url}" target="_blank" class="text-violet-400 hover:text-violet-500">View on GitHub →</a>`;
+            container.appendChild(card);
+          });
+        } catch (e) {
+          container.innerHTML = '<p class="text-gray-400">Failed to load projects.</p>';
+        }
+      }
+      loadGitHubProjects();
+    </script>
+</body>
+</html>
