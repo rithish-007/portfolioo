@@ -8,13 +8,81 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap');
-      body { font-family: 'Cormorant Garamond', serif; background-color: #000; color: #f3f4f6; overflow-x: hidden; }
-      canvas { position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%; }
-      .section { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 4rem 1rem; position: relative; }
-      .project-card { background-color: rgba(30, 41, 59, 0.7); backdrop-filter: blur(8px); border-radius: 1rem; border: 1px solid rgba(255, 255, 255, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-      .project-card:hover { transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-      .animate-on-scroll { opacity: 0; transform: translateY(50px); transition: opacity 1s ease-out, transform 1s ease-out; }
-      .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+      body {
+          font-family: 'Cormorant Garamond', serif;
+          background-color: #000000;
+          color: #f3f4f6;
+          overflow-x: hidden;
+      }
+      canvas {
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: -1;
+          width: 100%;
+          height: 100%;
+      }
+      .section {
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 4rem 1rem;
+          position: relative;
+      }
+      .project-card {
+          background-color: rgba(30, 41, 59, 0.7);
+          backdrop-filter: blur(8px);
+          border-radius: 1rem;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .project-card:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      }
+      .animate-on-scroll {
+          opacity: 0;
+          transform: translateY(50px);
+          transition: opacity 1s ease-out, transform 1s ease-out;
+      }
+      .animate-on-scroll.is-visible {
+          opacity: 1;
+          transform: translateY(0);
+      }
+      .fade-in-up {
+          animation: slideInUp 1s ease-out forwards;
+      }
+      .fade-in-zoom {
+          animation: fadeInZoom 1s ease-out forwards;
+      }
+      @keyframes slideInUp {
+          from { opacity: 0; transform: translateY(50px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes fadeInZoom {
+          from { opacity: 0; transform: scale(0.8); }
+          to { opacity: 1; transform: scale(1); }
+      }
+      .profile-photo {
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .logo-icon {
+          fill: #f3f4f6;
+          transition: fill 0.3s ease, transform 0.3s ease;
+      }
+      .logo-icon:hover {
+          fill: #8B5CF6;
+          transform: scale(1.1);
+      }
+      #mobile-menu.is-open {
+          display: block;
+          animation: fadeIn 0.5s ease-out;
+      }
+      @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-20px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
     </style>
 </head>
 <body class="bg-[#000000] text-gray-100">
@@ -23,41 +91,73 @@
     <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 p-4 md:p-6 backdrop-filter backdrop-blur-md bg-opacity-30 bg-gray-900 border-b border-gray-700">
         <nav class="flex justify-between items-center max-w-7xl mx-auto">
-            <h1 class="text-lg md:text-xl font-bold tracking-wide">RITHISH METTU</h1>
+            <div class="flex items-center space-x-4">
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-300 hover:text-white transition-colors duration-300">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+                <h1 class="text-lg md:text-xl font-bold tracking-wide">Rithish Mettu</h1>
+            </div>
+            
+            <!-- Desktop Menu -->
             <div class="hidden md:flex space-x-4 md:space-x-8 text-sm md:text-base font-medium">
-                <a href="#home" class="hover:text-violet-400"><i class="fas fa-home mr-2"></i>Home</a>
-                <a href="#about" class="hover:text-violet-400"><i class="fas fa-user-tie mr-2"></i>About</a>
-                <a href="#projects" class="hover:text-violet-400"><i class="fas fa-project-diagram mr-2"></i>Projects</a>
-                <a href="#certifications" class="hover:text-violet-400"><i class="fas fa-certificate mr-2"></i>Certifications</a>
-                <a href="#resume" class="hover:text-violet-400"><i class="fas fa-file-alt mr-2"></i>Resume</a>
-                <a href="#contact" class="hover:text-violet-400"><i class="fas fa-envelope mr-2"></i>Contact</a>
+                <a href="#home" class="hover:text-violet-400 transition-colors duration-300 flex items-center"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="#about" class="hover:text-violet-400 transition-colors duration-300 flex items-center"><i class="fas fa-user-tie mr-2"></i>About</a>
+                <a href="#projects" class="hover:text-violet-400 transition-colors duration-300 flex items-center"><i class="fas fa-project-diagram mr-2"></i>Projects</a>
+                <a href="#coding-profiles" class="hover:text-violet-400 transition-colors duration-300 flex items-center"><i class="fas fa-code mr-2"></i>Coding Profiles</a>
+                <a href="#certifications" class="hover:text-violet-400 transition-colors duration-300 flex items-center"><i class="fas fa-certificate mr-2"></i>Certifications</a>
+                <a href="#resume" class="hover:text-violet-400 transition-colors duration-300 flex items-center"><i class="fas fa-file-alt mr-2"></i>Resume</a>
+                <a href="#contact" class="hover:text-violet-400 transition-colors duration-300 flex items-center"><i class="fas fa-envelope mr-2"></i>Contact</a>
             </div>
         </nav>
+        
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 bg-gray-900 bg-opacity-70 rounded-lg shadow-xl p-4 transition-all">
+            <div class="flex flex-col space-y-4 text-left text-sm">
+                <a href="#home" class="hover:text-violet-400 transition-colors duration-300 flex items-center"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="#about" class="hover:text-violet-400 transition-colors duration-300 flex items-center"><i class="fas fa-user-tie mr-2"></i>About</a>
+                <a href="#projects" class="hover:text-violet-400 transition-colors duration-300 flex items-center"><i class="fas fa-project-diagram mr-2"></i>Projects</a>
+                <a href="#coding-profiles" class="hover:text-violet-400 transition-colors duration-300 flex items-center"><i class="fas fa-code mr-2"></i>Coding Profiles</a>
+                <a href="#certifications" class="hover:text-violet-400 transition-colors duration-300 flex items-center"><i class="fas fa-certificate mr-2"></i>Certifications</a>
+                <a href="#resume" class="hover:text-violet-400 transition-colors duration-300 flex items-center"><i class="fas fa-file-alt mr-2"></i>Resume</a>
+                <a href="#contact" class="hover:text-violet-400 transition-colors duration-300 flex items-center"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            </div>
+        </div>
     </header>
 
     <main>
         <!-- Home Section -->
         <section id="home" class="section text-center">
             <div class="max-w-4xl mx-auto p-4 md:p-8">
-                <img src="profile.jpg" alt="Profile Photo" class="profile-photo mx-auto mb-4 rounded-full w-32 h-32 md:w-40 md:h-40 object-cover">
-                <h2 class="text-3xl md:text-6xl font-bold mb-4">Hello, I am <span class="text-violet-400">Rithish</span>.</h2>
-                <p class="text-lg text-gray-300 max-w-3xl mx-auto">A passionate B.Tech student in Computer Science seeking to work in a challenging and healthy work environment where I can utilize my skills and knowledge efficiently for organizational growth.</p>
+                <img src="https://media.licdn.com/dms/image/v2/D5603AQEpP0t3KgfYXg/profile-displayphoto-shrink_400_400/B56ZUuHiTwHQAg-/0/1740235483406?e=1761177600&v=beta&t=7IjVphT2Bn2gwcgZ40yDYZGDfIY2JdsxeKRm96PV0b4" alt="Profile Photo" class="profile-photo mx-auto mb-4 rounded-full w-32 h-32 md:w-40 md:h-40 fade-in-zoom" style="animation-delay: 0.3s;">
+                <h2 class="text-3xl md:text-6xl font-bold leading-tight mb-4 fade-in-up" style="animation-delay: 0.5s;">Hello, I am <span class="text-violet-400">Rithish Mettu</span>.</h2>
+                <p class="text-base md:text-lg text-gray-300 max-w-3xl mx-auto fade-in-up" style="animation-delay: 0.7s;">A passionate B.Tech student in Computer Science (cybersecurity) seeking a rewarding career. I am driven to utilize my skills and knowledge to create impactful digital solutions and contribute to organizational growth in a challenging and healthy work environment.</p>
             </div>
         </section>
 
         <!-- About Section -->
         <section id="about" class="section bg-gray-900 bg-opacity-50 animate-on-scroll">
-            <div class="max-w-4xl mx-auto p-6 rounded-xl shadow-lg border border-gray-700">
-                <h3 class="text-3xl font-bold mb-6 text-center text-violet-400">About Me</h3>
-                <p class="text-gray-300 text-center mb-6">I am Rithish Mettu, currently pursuing B.Tech in Computer Science at Institute of Aeronautical Engineering. I hold a Diploma in CSE from Kshatriya College of Engineering (CGPA 8.58) and SSC with 10 CGPA. Skilled in C, Python, Java, HTML, and JavaScript, with strengths in communication, problem solving, and time management.</p>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-gray-800 p-4 rounded-lg">
-                        <h4 class="font-semibold text-white mb-2">Education</h4>
-                        <p><strong>B.Tech CSE</strong> – IARE (2024 – Present)<br><strong>Diploma CSE</strong> – Kshatriya College (2021 – 2024)<br><strong>SSC</strong> – ZPHS Mirdhapally (2020 – 2021)</p>
+            <div class="max-w-4xl mx-auto p-4 md:p-8 rounded-xl shadow-lg border border-gray-700">
+                <h3 class="text-2xl md:text-4xl font-bold mb-6 text-center text-violet-400">About Me</h3>
+                <p class="text-gray-300 text-base md:text-lg leading-relaxed text-center">
+                    I’m a Cybersecurity student at Institute Of Aeronautical Engineering (IARE) Hyderabad, after completing my Diploma in Computer Science and Engineering.Passionate about web development, I specialize in Django (Python), Java, and SQL. I have built and deployed dynamic web applications, focusing on performance, scalability, and user experience.I enjoy working in teams, writing clean and efficient code, and continuously learning new technologies. With experience in full-stack development and database management, I love solving problems and building practical solutions.Eager to take on new challenges, I aim to contribute my skills to innovative projects and Artificial Intelligence through internships at Inoventive Solutions, IARE, and VISWAM.AI.
+                </p>
+                <div class="mt-8 space-y-8 text-center">
+                    <div class="bg-gray-800 p-6 rounded-lg shadow-inner">
+                        <h4 class="text-lg font-semibold text-white mb-2">Education</h4>
+                        <p class="mt-2 text-gray-300">
+                            <strong>Institute of Aeronautical Engineering</strong><br>
+                            B.Tech - Computer Science Engineering (Cyber Security)<br>
+                            Expected Graduation: May 2027<br><br>
+                            <strong>Kshatriya College Of Engineering</strong><br>
+                            Diploma - Computer Science and Engineering<br>
+                            August 2021 - june 2024<br>
+                        </p>
                     </div>
-                    <div class="bg-gray-800 p-4 rounded-lg">
-                        <h4 class="font-semibold text-white mb-2">Skills</h4>
-                        <p><strong>Programming:</strong> C, Python, Java<br><strong>Scripting:</strong> HTML, JavaScript<br><strong>Soft Skills:</strong> Communication, Problem Solving, Time Management</p>
+                    <div class="bg-gray-800 p-6 rounded-lg shadow-inner">
+                        <h4 class="text-lg font-semibold text-white mb-2">Skills & Technologies</h4>
+                        <p class="text-gray-400">Languages: Java, Python, c, c++, HTML, CSS, JavaScript, SQL,Mongo DB</p>
+                        <p class="text-400">Tools: Git, GitHub, Visual Studio Code,  Linux</p>
                     </div>
                 </div>
             </div>
@@ -66,10 +166,54 @@
         <!-- Projects Section -->
         <section id="projects" class="section bg-gray-900 animate-on-scroll">
             <div class="max-w-6xl mx-auto p-4 md:p-8 w-full">
-                <h3 class="text-3xl font-bold mb-6 text-center text-violet-400">My Projects</h3>
-                <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-                <div class="text-center mt-6">
-                    <a href="https://github.com/rithish-007" target="_blank" class="px-6 py-3 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-lg font-semibold hover:scale-105 inline-block transition">View All Projects →</a>
+                <h3 class="text-2xl md:text-4xl font-bold mb-12 text-center text-violet-400">My Projects</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                    <!-- Project 1 -->
+                    <div class="project-card p-6 shadow-xl">
+                        <h4 class="text-lg md:text-xl font-semibold mb-3">Heritage Hub</h4>
+                        <p class="text-gray-300 mb-4">A community-driven platform to preserve local history and cultural heritage.</p>
+                        <ul class="list-disc list-inside text-gray-400 text-sm md:text-base">
+                            <li>Shared local history and stories.</li>
+                            <li>Preserves traditions and knowledge for future generations.</li>
+                            <li>Built with HTML, CSS, and JavaScript.</li>
+                        </ul>
+                        <a href="https://github.com/rithish-007/heritage-hub.git" target="_blank" class="mt-4 inline-block text-violet-400 hover:text-violet-500 transition-colors duration-300 font-medium">View on GitHub &rarr;</a>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="project-card p-6 shadow-xl">
+                        <h4 class="text-lg md:text-xl font-semibold mb-3">Data Driven mobility solutions</h4>
+                        <p class="text-gray-300 mb-4">A digital hardware project designed for efficient power consumption.</p>
+                        <ul class="list-disc list-inside text-gray-400 text-sm md:text-base">
+                            <li>"Data Driven Mobility Solutions is an open-source platform that leverages analytics and real-world transportation data to optimize urban mobility, improve trip planning, and support seamless multimodal transit for cities and citizens.</li>
+                            <li>Data Driven Mobility Solutions integrates real-time analytics and multimodal data to optimize urban transit, improve planning, and support seamless, efficient travel for all users.</li>
+                            <li>This project uses Streamlit as its main framework to build interactive web applications for mobility data analysis, visualization, and user-driven urban transport insights.</li>
+                        </ul>
+                        <a href="https://github.com/rithish-007/Data_Driven_mobility_solutions.git" target="_blank" class="mt-4 inline-block text-violet-400 hover:text-violet-500 transition-colors duration-300 font-medium">View on GitHub &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coding Profiles Section -->
+        <section id="coding-profiles" class="section bg-gray-900 bg-opacity-50 animate-on-scroll">
+            <div class="max-w-4xl mx-auto p-4 md:p-8 rounded-xl shadow-lg border border-gray-700 text-center">
+                <h3 class="text-2xl md:text-4xl font-bold mb-6 text-violet-400">Coding Profiles</h3>
+                <p class="text-gray-300 mb-8 max-w-2xl mx-auto">Here are some of my coding profiles where I showcase my problem-solving skills and competitive programming journey.</p>
+                
+                <div class="flex flex-wrap justify-center items-center gap-10">
+                    <a href="https://leetcode.com/u/rithish_mettu/" target="_blank" class="flex flex-col items-center group">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/LeetCode_Logo_1.png" alt="LeetCode Logo" class="h-16 w-16 mb-2 logo-icon rounded-full"/>
+                        <span class="text-gray-300 group-hover:text-violet-400 transition-colors duration-300">LeetCode</span>
+                    </a>
+                    <a href="https://www.geeksforgeeks.org/user/rithishh32y
+/" target="_blank" class="flex flex-col items-center group">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA4exfK9w9g_rL_0M-REN0UYKkEhSSDadugw&s" alt="GeeksforGeeks Logo" class="h-16 w-16 mb-2 logo-icon rounded-full"/>
+                        <span class="text-gray-300 group-hover:text-violet-400 transition-colors duration-300">GeeksforGeeks</span>
+                    </a>
+                    <a href="https://www.hackerrank.com/profile/rithish_mettu" target="_blank" class="flex flex-col items-center group">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/HackerRank_Icon-1000px.png/500px-HackerRank_Icon-1000px.png" alt="HackerRank Logo" class="h-16 w-16 mb-2 logo-icon rounded-full"/>
+                        <span class="text-gray-300 group-hover:text-violet-400 transition-colors duration-300">HackerRank</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -77,11 +221,38 @@
         <!-- Certifications Section -->
         <section id="certifications" class="section bg-transparent animate-on-scroll">
             <div class="max-w-6xl mx-auto p-4 md:p-8 w-full">
-                <h3 class="text-3xl font-bold mb-6 text-center text-violet-400">Certifications</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="project-card p-6 text-center"><h4 class="font-semibold">Industrial Training</h4><p class="text-gray-400">Certified by NSIC as part of industrial training internship.</p></div>
-                    <div class="project-card p-6 text-center"><h4 class="font-semibold">Cybersecurity Internship</h4><p class="text-gray-400">Certified by Tata Group as Cybersecurity Analyst (Job Simulation).</p></div>
-                    <div class="project-card p-6 text-center"><h4 class="font-semibold">TCS iON Career Edge</h4><p class="text-gray-400">Young Professional Program Certification.</p></div>
+                <h3 class="text-2xl md:text-4xl font-bold mb-12 text-center text-violet-400">Certifications</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- TCS iON Certificate -->
+                    <div class="project-card p-6 shadow-xl text-center">
+                        <h4 class="text-lg md:text-xl font-semibold mb-3">TCS iON Career Edge - Young Professional</h4>
+                        <p class="text-gray-300 mb-2">TATA Consultancy Services</p>
+                        <p class="text-gray-400 text-sm">Issued May 2025</p>
+                    </div>
+                    <!-- Oracle Certificate -->
+                    <div class="project-card p-6 shadow-xl text-center">
+                        <h4 class="text-lg md:text-xl font-semibold mb-3">Oracle Certified Foundations Associate</h4>
+                        <p class="text-gray-300 mb-2">Oracle University</p>
+                        <p class="text-400 text-sm">Issued September 2025</p>
+                    </div>
+                    <!-- NSIC Certificate -->
+                    <div class="project-card p-6 shadow-xl text-center">
+                        <h4 class="text-lg md:text-xl font-semibold mb-3">Internship</h4>
+                        <p class="text-gray-300 mb-2">National Small Industries Corporation</p>
+                        <p class="text-400 text-sm">Issued december 2023</p>
+                    </div>
+                    <!-- Summer Research Internship Certificate -->
+                    <div class="project-card p-6 shadow-xl text-center">
+                        <h4 class="text-lg md:text-xl font-semibold mb-3">Summer Research Internship</h4>
+                        <p class="text-gray-300 mb-2">IARE</p>
+                        <p class="text-gray-400 text-sm">Issued June 2025</p>
+                    </div>
+                    <!-- Infosis Springboard/Coursera Certificate -->
+                    <div class="project-card p-6 shadow-xl text-center">
+                        <h4 class="text-lg md:text-xl font-semibold mb-3">Cyber Security </h4>
+                        <p class="text-gray-300 mb-2">Infosis Springboard</p>
+                        <p class="text-gray-400 text-sm">Issued May 2025</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -89,47 +260,200 @@
         <!-- Resume Section -->
         <section id="resume" class="section bg-gray-900 animate-on-scroll">
             <div class="max-w-4xl mx-auto p-4 md:p-8 rounded-xl shadow-lg border border-gray-700 text-center">
-                <h3 class="text-3xl font-bold mb-6 text-violet-400">My Resume</h3>
-                <p class="text-gray-300 mb-6">Click below to download my full resume.</p>
-                <a href="RITHISH-METTU-RESUME.pdf" download class="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold bg-gradient-to-r from-violet-600 to-indigo-600 rounded-lg shadow-lg hover:scale-105"><i class="fas fa-download"></i> Download Resume</a>
+                <h3 class="text-2xl md:text-4xl font-bold mb-6 text-violet-400">My Resume</h3>
+                <p class="text-gray-300 mb-8 max-w-2xl mx-auto">Click the button below to download my full resume.</p>
+                <a href="https://drive.google.com/file/d/1XW57T1sArZJfiylw3jG9lVCg_nR46kED/view?usp=sharing" download="RITHISH-METTU-RESUME.pdf" class="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-violet-600 to-indigo-600 rounded-lg shadow-lg hover:from-violet-700 hover:to-indigo-700 transition-colors duration-300 transform hover:scale-105">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                        <path fill-rule="evenodd" d="M12 2.25a.75.75 0 0 1 .75.75v11.69l3.53-3.53a.75.75 0 1 1 1.06 1.06l-4.75 4.75a.75.75 0 0 1-1.06 0l-4.75-4.75a.75.75 0 1 1 1.06-1.06l3.53 3.53V3a.75.75 0 0 1 .75-.75Zm-9 13.5a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" />
+                    </svg>
+                    Download Resume
+                </a>
             </div>
         </section>
 
-        <!-- Contact Section -->
+        <!-- Certifications & Contact Section -->
         <section id="contact" class="section animate-on-scroll">
             <div class="max-w-4xl mx-auto p-4 md:p-8 rounded-xl shadow-lg border border-gray-700 text-center bg-gray-900 bg-opacity-50">
-                <h3 class="text-3xl font-bold mb-6 text-violet-400">Get in Touch</h3>
+                <h3 class="text-2xl md:text-4xl font-bold mb-6 text-violet-400">Get in Touch</h3>
+                <p class="text-gray-300 mb-8 max-w-2xl mx-auto">I'm currently seeking new opportunities. Feel free to connect with me or reach out for collaboration.</p>
+                
                 <div class="space-y-4 flex flex-col justify-center items-center">
-                    <a href="mailto:rithishmettu7@gmail.com" class="inline-flex items-center justify-center px-6 py-3 font-semibold border-2 border-gray-500 rounded-lg hover:bg-gray-800 w-full"><i class="fas fa-envelope mr-2"></i>Email: rithishmettu7@gmail.com</a>
-                    <a href="tel:+918978226471" class="inline-flex items-center justify-center px-6 py-3 font-semibold border-2 border-gray-500 rounded-lg hover:bg-gray-800 w-full"><i class="fas fa-phone mr-2"></i>Phone: +91 8978226471</a>
-                    <a href="https://www.linkedin.com/posts/rithishmettu_tcsion-careeredge-youngprofessional-activity-7320479756343218176-wNJa" target="_blank" class="inline-flex items-center justify-center px-6 py-3 font-semibold border-2 border-gray-500 rounded-lg hover:bg-gray-800 w-full"><i class="fab fa-linkedin mr-2"></i>LinkedIn</a>
-                    <a href="https://github.com/rithish-007" target="_blank" class="inline-flex items-center justify-center px-6 py-3 font-semibold border-2 border-gray-500 rounded-lg hover:bg-gray-800 w-full"><i class="fab fa-github mr-2"></i>GitHub</a>
+                    <a href="mailto:rithishmettu7@mail.com" class="inline-flex items-center justify-center px-6 py-3 font-semibold text-white border-2 border-gray-500 rounded-lg hover:bg-gray-800 transition-colors duration-300 w-full">
+                        <i class="fas fa-envelope mr-2"></i>Email Me
+                    </a>
+                    <a href="tel:+918978226471" class="inline-flex items-center justify-center px-6 py-3 font-semibold text-white border-2 border-gray-500 rounded-lg hover:bg-gray-800 transition-colors duration-300 w-full">
+                        <i class="fas fa-phone mr-2"></i>Phone: +91 8978226471
+                    </a>
+                    <a href="https://www.linkedin.com/in/rithishmettu" target="_blank" class="inline-flex items-center justify-center px-6 py-3 font-semibold text-white border-2 border-gray-500 rounded-lg hover:bg-gray-800 transition-colors duration-300 w-full">
+                        <i class="fab fa-linkedin mr-2"></i>Connect on LinkedIn
+                    </a>
+                    <a href="https://github.com/rithish-007" target="_blank" class="inline-flex items-center justify-center px-6 py-3 font-semibold text-white border-2 border-gray-500 rounded-lg hover:bg-gray-800 transition-colors duration-300 w-full">
+                        <i class="fab fa-github mr-2"></i>View my GitHub
+                    </a>
                 </div>
-                <p class="mt-8 text-gray-500 text-sm">© 2025 Rithish Mettu. All Rights Reserved.</p>
+                
+                <p class="mt-8 text-gray-500 text-sm">© 2024 Rithish Mettu. All Rights Reserved.</p>
             </div>
         </section>
     </main>
-
     <script>
-      async function loadGitHubProjects() {
-        const container = document.getElementById('projects-container');
-        container.innerHTML = '<p class="text-gray-400">Loading projects...</p>';
-        try {
-          const res = await fetch('https://api.github.com/users/rithish-007/repos?sort=updated');
-          let repos = await res.json();
-          repos = repos.filter(r => !r.fork).slice(0, 6);
-          container.innerHTML = '';
-          repos.forEach(repo => {
-            const card = document.createElement('div');
-            card.className = 'project-card p-6 shadow-xl';
-            card.innerHTML = `<h4 class="text-lg font-semibold mb-2">${repo.name}</h4><p class="text-gray-300 mb-3">${repo.description || 'No description provided.'}</p><a href="${repo.html_url}" target="_blank" class="text-violet-400 hover:text-violet-500">View on GitHub →</a>`;
-            container.appendChild(card);
-          });
-        } catch (e) {
-          container.innerHTML = '<p class="text-gray-400">Failed to load projects.</p>';
-        }
+      // Function to generate a random number within a range
+      function getRandom(min, max) {
+        return Math.random() * (max - min) + min;
       }
-      loadGitHubProjects();
+      function createStar(x, y, innerRadius, outerRadius, color, numPoints) {
+        return { 
+          x, 
+          y, 
+          innerRadius, 
+          outerRadius, 
+          color, 
+          numPoints,
+          alpha: getRandom(0.3, 0.9), 
+          twinkleSpeed: getRandom(0.005, 0.02), 
+          alphaDirection: 1, 
+          velocity: { x: getRandom(-0.5, 0.5), y: getRandom(-0.5, 0.5) } 
+        };
+      }
+      function drawStar(ctx, star) {
+          const { x, y, innerRadius, outerRadius, color, numPoints, alpha } = star;
+          let rot = Math.PI / 2 * 3;
+          let step = Math.PI / numPoints;
+
+          ctx.save();
+          ctx.beginPath();
+          ctx.globalAlpha = alpha;
+          ctx.fillStyle = color;
+
+          ctx.moveTo(x + Math.cos(rot) * outerRadius, y + Math.sin(rot) * outerRadius);
+          
+          for (let i = 0; i < numPoints; i++) {
+              ctx.lineTo(x + Math.cos(rot += step) * innerRadius, y + Math.sin(rot) * innerRadius);
+              ctx.lineTo(x + Math.cos(rot += step) * outerRadius, y + Math.sin(rot) * outerRadius);
+          }
+          ctx.closePath();
+          ctx.fill();
+          ctx.restore();
+      }
+
+      function starryBackground() {
+        const canvas = document.getElementById('starCanvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        const numStars = 500;
+        const repelRadius = 100;
+        const repelForce = 0.5;
+        let mouse = { x: null, y: null };
+        window.addEventListener('mousemove', function(event) {
+            mouse.x = event.clientX;
+            mouse.y = event.clientY;
+        });
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            stars = [];
+            for (let i = 0; i < numStars; i++) {
+                const outerRadius = getRandom(1, 3);
+                const innerRadius = outerRadius / 2;
+                stars.push(createStar(Math.random() * canvas.width, Math.random() * canvas.height, innerRadius, outerRadius, 'white', 5));
+            }
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        
+        function update() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                if (mouse.x !== null && mouse.y !== null) {
+                    const dxMouse = star.x - mouse.x;
+                    const dyMouse = star.y - mouse.y;
+                    const distanceMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+                    if (distanceMouse < repelRadius) {
+                        const force = (repelRadius - distanceMouse) / repelRadius;
+                        star.velocity.x += (dxMouse / distanceMouse) * force * repelForce;
+                        star.velocity.y += (dyMouse / distanceMouse) * force * repelForce;
+                    }
+                }
+                star.velocity.x += getRandom(-0.1, 0.1);
+                star.velocity.y += getRandom(-0.1, 0.1);
+
+                star.velocity.x *= 0.98;
+                star.velocity.y *= 0.98;
+
+                if (star.x + star.outerRadius > canvas.width || star.x - star.outerRadius < 0) {
+                    star.velocity.x *= -1;
+                }
+                if (star.y + star.outerRadius > canvas.height || star.y - star.outerRadius < 0) {
+                    star.velocity.y *= -1;
+                }
+
+                star.x += star.velocity.x;
+                star.y += star.velocity.y;
+
+                star.alpha += star.twinkleSpeed * star.alphaDirection;
+                if (star.alpha > 0.9 || star.alpha < 0.3) {
+                    star.alphaDirection *= -1;
+                }
+                drawStar(ctx, star);
+            });
+            requestAnimationFrame(update);
+        }
+        update();
+      }
+      function setupScrollBehavior() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+              window.scrollTo({ top: targetElement.offsetTop, behavior: 'smooth' });
+            }
+          });
+        });
+      }
+      function setupAnimations() {
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.2 };
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+        document.querySelectorAll('.animate-on-scroll').forEach(section => {
+          observer.observe(section);
+        });
+      }
+
+      function setupMobileMenu() {
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuLinks = mobileMenu.querySelectorAll('a');
+        
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('is-open');
+        });
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('is-open');
+            });
+        });
+      }
+
+      window.onload = function() {
+        starryBackground();
+        setupScrollBehavior();
+        setupAnimations();
+        setupMobileMenu();
+        document.querySelector('#home').classList.add('is-visible');
+      };
     </script>
 </body>
 </html>
